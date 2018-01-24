@@ -174,6 +174,8 @@ public class Window {
         this.height = height;
         glfwSetWindowSize(id, width, height);
         glViewport(0, 0, width, height);
+        rootCanvas.setWidth(width);
+        rootCanvas.setHeight(height);
     }
 
     /**

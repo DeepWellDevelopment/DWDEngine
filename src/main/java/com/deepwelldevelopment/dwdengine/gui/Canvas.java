@@ -43,8 +43,8 @@ public class Canvas extends GuiComponent {
         quad.setColor(r, g, b);
     }
 
-    public void addChild(GuiComponent child) {
-        children.add(child);
+    public void addComponent(GuiComponent component) {
+        children.add(component);
     }
 
     @Override
