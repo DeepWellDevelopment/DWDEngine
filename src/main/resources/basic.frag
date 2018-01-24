@@ -2,6 +2,8 @@
 
 out vec3 color;
 
+in vec3 vertexColor;
+
 void main() {
-	color = vec3(1, 1, 1);
+	color = vertexColor;
 }

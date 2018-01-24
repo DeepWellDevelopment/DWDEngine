@@ -40,6 +40,7 @@ public class Canvas extends GuiComponent {
 
     public void setColor(float r, float g, float b) {
         color.set(r, g, b);
+        quad.setColor(r, g, b);
     }
 
     public void addChild(GuiComponent child) {

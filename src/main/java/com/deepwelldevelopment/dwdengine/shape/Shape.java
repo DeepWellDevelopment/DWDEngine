@@ -13,9 +13,16 @@ import java.nio.FloatBuffer;
 public abstract class Shape {
 
     protected FloatBuffer vertices;
-    private FloatBuffer uvCoordinates;
+    protected FloatBuffer uvCoordinates;
+    protected FloatBuffer color;
     Shader shader;
-    int buffer;
+    int vertexBuffer;
+    int colorBuffer;
+
+    protected Shape() {
+    }
+
+    public abstract void setColor(float r, float g, float b);
 
     /**
      * Draws the shape using the active OpenGL context

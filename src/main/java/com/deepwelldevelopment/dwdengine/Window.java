@@ -132,6 +132,7 @@ public class Window {
         glBindVertexArray(vao);
 
         rootCanvas = new Canvas(this, 0, 0, width, height);
+        rootCanvas.setColor(0.4f, 0.2f, 0.3f);
     }
 
     /**
