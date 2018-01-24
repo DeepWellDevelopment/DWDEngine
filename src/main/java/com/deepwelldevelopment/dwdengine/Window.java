@@ -1,5 +1,6 @@
 package com.deepwelldevelopment.dwdengine;
 
+import com.deepwelldevelopment.dwdengine.gui.Canvas;
 import org.lwjgl.glfw.GLFWMouseButtonCallback;
 import org.lwjgl.glfw.GLFWWindowSizeCallback;
 import org.lwjgl.opengl.GLCapabilities;
@@ -52,11 +53,13 @@ public class Window {
      */
     private int height;
     /**
-     * The VertexArrayObject (vao) of the window. Will later be implements in an OO faahion
+     * The VertexArrayObject (vao) of the window. Will later be implements in an OO fashion
      */
     private int vao;
 
-    private GLCapabilities capabilities;;
+    private GLCapabilities capabilities;
+
+    private Canvas rootCanvas;
 
     public Window(String title, int width, int height) {
         this(4, 3, 3, true, title, width, height);
@@ -127,6 +130,8 @@ public class Window {
 
         vao = glGenVertexArrays();
         glBindVertexArray(vao);
+
+        rootCanvas = new Canvas(this, 0, 0, width, height);
     }
 
     /**
@@ -186,6 +191,7 @@ public class Window {
      */
     public void render() {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        rootCanvas.render();
         glfwSwapBuffers(id);
     }
 
@@ -200,5 +206,54 @@ public class Window {
         glfwDestroyWindow(window.id);
         glfwTerminate();
         glDeleteVertexArrays(window.vao);
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public int getSamples() {
+        return samples;
+    }
+
+    public int getMajorVersion() {
+        return majorVersion;
+    }
+
+    public int getMinorVersion() {
+        return minorVersion;
+    }
+
+    public boolean isForwardCompat() {
+        return forwardCompat;
+    }
+
+    public GLCapabilities getCapabilities() {
+        return capabilities;
+    }
+
+    public String getTitle() {
+
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public void setWidth(int width) {
+        this.width = width;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
     }
 }

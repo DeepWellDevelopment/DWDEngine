@@ -1,7 +1,10 @@
 package com.deepwelldevelopment.dwdengine.gui;
 
 
+import com.deepwelldevelopment.dwdengine.Window;
+import com.deepwelldevelopment.dwdengine.shape.Quad;
 import com.deepwelldevelopment.dwdengine.shape.Shape;
+import org.joml.Vector3f;
 
 import java.util.ArrayList;
 
@@ -16,20 +19,39 @@ import java.util.ArrayList;
  */
 public class Canvas extends GuiComponent {
 
-    ArrayList<GuiComponent> children;
-    ArrayList<Shape> shapes;
+    private ArrayList<GuiComponent> children;
+    private ArrayList<Shape> shapes;
 
-    public Canvas() {
-        this(0, 0, 0, 0);
+    Vector3f color;
 
+    /**
+     * The internal representation of this canvas object. Used for rendering
+     */
+    private Quad quad;
+
+    public Canvas(Window window, float x, float y, float width, float height) {
+        super(window, x, y, width, height);
+
+        children = new ArrayList<>();
+        shapes = new ArrayList<>();
+        color = new Vector3f(0.0f, 0.0f, 0.0f);
+        quad = new Quad(x, y, 0, width, height);
     }
 
-    public Canvas(float x, float y, float width, float height) {
-        super(x, y, width, height);
+    public void setColor(float r, float g, float b) {
+        color.set(r, g, b);
+    }
+
+    public void addChild(GuiComponent child) {
+        children.add(child);
     }
 
     @Override
     public void render() {
+        children.forEach(c -> render());
+        shapes.forEach(c -> render());
 
+        //self rendering
+        quad.render();
     }
 }
