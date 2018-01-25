@@ -1,10 +1,13 @@
 package com.deepwelldevelopment.dwdengine;
 
 import com.deepwelldevelopment.dwdengine.gui.Canvas;
+import com.deepwelldevelopment.dwdengine.gui.MouseEvent;
+import org.lwjgl.glfw.GLFWCursorPosCallback;
 import org.lwjgl.glfw.GLFWMouseButtonCallback;
 import org.lwjgl.glfw.GLFWWindowSizeCallback;
 import org.lwjgl.opengl.GLCapabilities;
 
+import static java.lang.Math.abs;
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL.createCapabilities;
 import static org.lwjgl.opengl.GL11.*;
@@ -106,6 +109,13 @@ public class Window {
                 if (action == GLFW_PRESS) {
                     resize(Window.this.width + 5, Window.this.height + 5);
                 }
+            }
+        });
+        glfwSetCursorPosCallback(id, new GLFWCursorPosCallback() {
+            @Override
+            public void invoke(long window, double x, double y) {
+                MouseEvent e = new MouseEvent(MouseEvent.MOVED, (int) x, (int) abs(y - Window.this.height));
+                rootCanvas.handleEvent(e);
             }
         });
         glfwSetWindowSizeCallback(id, new GLFWWindowSizeCallback() {

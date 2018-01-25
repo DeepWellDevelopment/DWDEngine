@@ -60,5 +60,7 @@ public abstract class GuiComponent {
         this.height = height;
     }
 
+    public abstract void handleEvent(InputEvent e);
+
     public abstract void render();
 }

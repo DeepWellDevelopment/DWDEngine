@@ -38,6 +38,17 @@ public class Canvas extends GuiComponent {
         quad = new Quad(x, y, 0, width, height);
     }
 
+    @Override
+    public void handleEvent(InputEvent e) {
+        //handle the event here
+        if (e instanceof MouseEvent) {
+            shapes.add(new Quad(((MouseEvent) e).getX(), ((MouseEvent) e).getY(), 0, 1, 1));
+        }
+
+        //delegate to children to handle the event
+        children.forEach(c -> handleEvent(e));
+    }
+
     public void setColor(float r, float g, float b) {
         color.set(r, g, b);
         quad.setColor(r, g, b);
@@ -50,7 +61,9 @@ public class Canvas extends GuiComponent {
     @Override
     public void render() {
         children.forEach(c -> render());
-        shapes.forEach(c -> render());
+        for (Shape s : shapes) {
+            s.render();
+        }
 
         //self rendering
         quad.render();
