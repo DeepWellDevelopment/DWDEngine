@@ -35,14 +35,14 @@ public class Canvas extends GuiComponent {
         children = new ArrayList<>();
         shapes = new ArrayList<>();
         color = new Vector3f(0.0f, 0.0f, 0.0f);
-        quad = new Quad(x, y, 0, width, height);
+        quad = new Quad(window, x, y, 0, width, height);
     }
 
     @Override
     public void handleEvent(InputEvent e) {
         //handle the event here
         if (e instanceof MouseEvent) {
-            shapes.add(new Quad(((MouseEvent) e).getX(), ((MouseEvent) e).getY(), 0, 1, 1));
+            shapes.add(new Quad(window, ((MouseEvent) e).getX(), ((MouseEvent) e).getY(), 0, 1, 1));
         }
 
         //delegate to children to handle the event

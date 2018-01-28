@@ -56,5 +56,9 @@ public abstract class Shader {
         glUniformMatrix4fv(location, false, mat.get(BufferUtils.createFloatBuffer(16)));
     }
 
+    public int getId() {
+        return id;
+    }
+
     protected abstract void getUniforms();
 }

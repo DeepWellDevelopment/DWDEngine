@@ -1,17 +1,17 @@
 package com.deepwelldevelopment.dwdengine.shape;
 
+import com.deepwelldevelopment.dwdengine.Window;
 import com.deepwelldevelopment.dwdengine.shader.BasicShader;
 import org.lwjgl.BufferUtils;
 
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL15.*;
-import static org.lwjgl.opengl.GL20.glDisableVertexAttribArray;
-import static org.lwjgl.opengl.GL20.glEnableVertexAttribArray;
-import static org.lwjgl.opengl.GL20.glVertexAttribPointer;
+import static org.lwjgl.opengl.GL20.*;
 
 public class Triangle extends Shape {
 
-    public Triangle(float x1, float y1, float z1, float x2, float y2, float z2, float x3, float y3, float z3) {
+    public Triangle(Window window, float x1, float y1, float z1, float x2, float y2, float z2, float x3, float y3, float z3) {
+        super(window);
         vertices = BufferUtils.createFloatBuffer(3 * 3);
         vertices.put(x1).put(y1).put(z1);
         vertices.put(x2).put(y2).put(z2);

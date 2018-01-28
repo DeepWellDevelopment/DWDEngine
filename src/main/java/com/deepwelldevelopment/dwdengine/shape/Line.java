@@ -1,18 +1,18 @@
 package com.deepwelldevelopment.dwdengine.shape;
 
+import com.deepwelldevelopment.dwdengine.Window;
 import com.deepwelldevelopment.dwdengine.shader.BasicShader;
 import org.joml.Vector3f;
 import org.lwjgl.BufferUtils;
 
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL15.*;
-import static org.lwjgl.opengl.GL20.glDisableVertexAttribArray;
-import static org.lwjgl.opengl.GL20.glEnableVertexAttribArray;
-import static org.lwjgl.opengl.GL20.glVertexAttribPointer;
+import static org.lwjgl.opengl.GL20.*;
 
 public class Line extends Shape {
 
-    public Line(Vector3f start, Vector3f end) {
+    public Line(Window window, Vector3f start, Vector3f end) {
+        super(window);
         vertices = BufferUtils.createFloatBuffer(2 * 3);
         vertices.put(start.x).put(start.y).put(start.z);
         vertices.put(end.x).put(end.y).put(end.z);

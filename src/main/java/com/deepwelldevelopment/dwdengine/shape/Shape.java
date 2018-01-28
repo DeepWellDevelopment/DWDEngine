@@ -1,8 +1,12 @@
 package com.deepwelldevelopment.dwdengine.shape;
 
+import com.deepwelldevelopment.dwdengine.Window;
+import com.deepwelldevelopment.dwdengine.shader.BasicShader;
 import com.deepwelldevelopment.dwdengine.shader.Shader;
 
 import java.nio.FloatBuffer;
+
+import static org.lwjgl.opengl.GL20.glGetUniformLocation;
 
 /**
  * Represents a basic primitive shape which can be rendered to an OpenGL context.
@@ -19,7 +23,16 @@ public abstract class Shape {
     int vertexBuffer;
     int colorBuffer;
 
-    protected Shape() {
+    int screenLocation;
+
+    Window window;
+
+    protected Shape(Window window) {
+        this.window = window;
+
+        shader = new BasicShader();
+        shader.useProgram();
+        screenLocation = glGetUniformLocation(shader.getId(), "screen");
     }
 
     public abstract void setColor(float r, float g, float b);

@@ -1,21 +1,17 @@
 package com.deepwelldevelopment.dwdengine.shape;
 
-import com.deepwelldevelopment.dwdengine.shader.BasicShader;
+import com.deepwelldevelopment.dwdengine.Window;
+import org.joml.Vector2f;
 import org.lwjgl.BufferUtils;
 
-import static org.lwjgl.opengl.GL11.GL_FLOAT;
-import static org.lwjgl.opengl.GL11.GL_TRIANGLES;
-import static org.lwjgl.opengl.GL11.glDrawArrays;
+import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL15.*;
-import static org.lwjgl.opengl.GL15.GL_ARRAY_BUFFER;
-import static org.lwjgl.opengl.GL15.GL_STATIC_DRAW;
-import static org.lwjgl.opengl.GL20.glDisableVertexAttribArray;
-import static org.lwjgl.opengl.GL20.glEnableVertexAttribArray;
-import static org.lwjgl.opengl.GL20.glVertexAttribPointer;
+import static org.lwjgl.opengl.GL20.*;
 
 public class Quad extends Shape {
 
-    public Quad(float x, float y, float z, float width, float height) {
+    public Quad(Window window, float x, float y, float z, float width, float height) {
+        super(window);
         vertices = BufferUtils.createFloatBuffer(2 * 3 * 3);
         vertices.put(x).put(y).put(z);
         vertices.put(x).put(y + height).put(z);
@@ -34,9 +30,6 @@ public class Quad extends Shape {
         color.put(1).put(1).put(1);
         color.flip();
 
-        shader = new BasicShader();
-        shader.useProgram();
-
         vertexBuffer = glGenBuffers();
         glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
         glBufferData(GL_ARRAY_BUFFER, vertices, GL_STATIC_DRAW);
@@ -54,8 +47,8 @@ public class Quad extends Shape {
      * @param z
      * @param size
      */
-    public Quad(float x, float y, float z, float size) {
-        this(x, y, z, size, size);
+    public Quad(Window window, float x, float y, float z, float size) {
+        this(window, x, y, z, size, size);
     }
 
     @Override
@@ -75,6 +68,7 @@ public class Quad extends Shape {
     @Override
     public void render() {
         shader.useProgram();
+        shader.loadVector2(screenLocation, new Vector2f(window.getWidth(), window.getHeight()));
         glEnableVertexAttribArray(0);
         glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
         glVertexAttribPointer(0, 3, GL_FLOAT, false, 0, 0);
