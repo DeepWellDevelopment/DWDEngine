@@ -11,7 +11,7 @@ import static org.lwjgl.opengl.GL20.*;
 public class Triangle extends Shape {
 
     public Triangle(Window window, float x1, float y1, float z1, float x2, float y2, float z2, float x3, float y3, float z3) {
-        super(window);
+        super(window, x1, y1, z1, false);
         vertices = BufferUtils.createFloatBuffer(3 * 3);
         vertices.put(x1).put(y1).put(z1);
         vertices.put(x2).put(y2).put(z2);
@@ -31,6 +31,11 @@ public class Triangle extends Shape {
     }
 
     @Override
+    public void setOutlineWidth(float width) {
+
+    }
+
+    @Override
     public void setColor(float r, float g, float b) {
         color.rewind();
         color.put(r).put(g).put(b);
@@ -38,6 +43,11 @@ public class Triangle extends Shape {
         color.put(r).put(g).put(b);
         glBindBuffer(GL_ARRAY_BUFFER, colorBuffer);
         glBufferData(GL_ARRAY_BUFFER, color, GL_STATIC_DRAW);
+    }
+
+    @Override
+    public void setOutlineColor(float r, float g, float b) {
+
     }
 
     @Override

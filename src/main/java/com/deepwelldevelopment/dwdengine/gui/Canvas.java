@@ -36,13 +36,13 @@ public class Canvas extends GuiComponent {
         shapes = new ArrayList<>();
         color = new Vector3f(0.0f, 0.0f, 0.0f);
         quad = new Quad(window, x, y, 0, width, height);
+        quad.setOutlineWidth(0);
     }
 
     @Override
     public void handleEvent(InputEvent e) {
         //handle the event here
         if (e instanceof MouseEvent) {
-            shapes.add(new Quad(window, ((MouseEvent) e).getX(), ((MouseEvent) e).getY(), 0, 1, 1));
         }
 
         //delegate to children to handle the event
@@ -52,6 +52,7 @@ public class Canvas extends GuiComponent {
     public void setColor(float r, float g, float b) {
         color.set(r, g, b);
         quad.setColor(r, g, b);
+        quad.setOutlineColor(0, 0, 0);
     }
 
     public void addComponent(GuiComponent component) {

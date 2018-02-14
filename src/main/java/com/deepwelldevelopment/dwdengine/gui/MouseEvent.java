@@ -26,7 +26,6 @@ public class MouseEvent extends InputEvent {
     }
 
     public MouseEvent(int eventCode, int x, int y) {
-        System.out.println(x + ", " + y);
         this.eventCode = eventCode;
         this.x = x;
         this.y = y;

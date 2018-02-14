@@ -12,7 +12,7 @@ import static org.lwjgl.opengl.GL20.*;
 public class Line extends Shape {
 
     public Line(Window window, Vector3f start, Vector3f end) {
-        super(window);
+        super(window, start.x, start.y, start.z, false);
         vertices = BufferUtils.createFloatBuffer(2 * 3);
         vertices.put(start.x).put(start.y).put(start.z);
         vertices.put(end.x).put(end.y).put(end.z);
@@ -31,12 +31,22 @@ public class Line extends Shape {
     }
 
     @Override
+    public void setOutlineWidth(float width) {
+
+    }
+
+    @Override
     public void setColor(float r, float g, float b) {
         color.rewind();
         color.put(r).put(g).put(b);
         color.put(r).put(g).put(b);
         glBindBuffer(GL_ARRAY_BUFFER, colorBuffer);
         glBufferData(GL_ARRAY_BUFFER, color, GL_STATIC_DRAW);
+    }
+
+    @Override
+    public void setOutlineColor(float r, float g, float b) {
+        //dows nothing, lines dont have an outline
     }
 
     @Override

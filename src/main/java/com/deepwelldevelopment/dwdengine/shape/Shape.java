@@ -17,28 +17,55 @@ import static org.lwjgl.opengl.GL20.glGetUniformLocation;
 public abstract class Shape {
 
     protected FloatBuffer vertices;
+    protected FloatBuffer outlineVertices;
     protected FloatBuffer uvCoordinates;
     protected FloatBuffer color;
+    protected FloatBuffer outlineColor;
     Shader shader;
     int vertexBuffer;
+    int outlineBuffer;
     int colorBuffer;
+    int outlineColorBuffer;
+
+    float x;
+    float y;
+    float z;
+    float outlineWidth;
 
     int screenLocation;
 
     Window window;
 
-    protected Shape(Window window) {
+    boolean fill;
+
+    protected Shape(Window window, float x, float y, float z, boolean fill) {
         this.window = window;
+        this.x = x;
+        this.y = y;
+        this.z = z;
+        this.fill = fill;
 
         shader = new BasicShader();
         shader.useProgram();
         screenLocation = glGetUniformLocation(shader.getId(), "screen");
     }
 
+    public abstract void setOutlineWidth(float width);
+
     public abstract void setColor(float r, float g, float b);
+
+    public abstract void setOutlineColor(float r, float g, float b);
 
     /**
      * Draws the shape using the active OpenGL context
      */
     public abstract void render();
+
+    public boolean isFill() {
+        return fill;
+    }
+
+    public void setFill(boolean fill) {
+        this.fill = fill;
+    }
 }
