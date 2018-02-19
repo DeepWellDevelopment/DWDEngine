@@ -9,7 +9,8 @@ import java.nio.FloatBuffer;
 import static org.lwjgl.opengl.GL20.glGetUniformLocation;
 
 /**
- * Represents a basic primitive shape which can be rendered to an OpenGL context.
+ * Represents a basic primitive shape which can be rendered to an OpenGL context. By default these basic shapes are not
+ * textured. To get a textured primitive shape, use one of the TexturedShape classes such as {@link TexturedQuad}
  *
  * @author CJ Schaefer
  * @since 1.0
@@ -18,7 +19,6 @@ public abstract class Shape {
 
     protected FloatBuffer vertices;
     protected FloatBuffer outlineVertices;
-    protected FloatBuffer uvCoordinates;
     protected FloatBuffer color;
     protected FloatBuffer outlineColor;
     Shader shader;
