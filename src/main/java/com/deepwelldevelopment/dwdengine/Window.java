@@ -126,6 +126,7 @@ public class Window {
             }
         });
 
+
         glfwMakeContextCurrent(id);
         glfwShowWindow(id);
 
@@ -143,6 +144,15 @@ public class Window {
 
         rootCanvas = new Canvas(this, 0, 0, width, height);
         rootCanvas.setColor(0.0F, 0.0F, 0.0f);
+    }
+
+    public Canvas getRootCanvas() {
+
+        return rootCanvas;
+    }
+
+    public void setRootCanvas(Canvas rootCanvas) {
+        this.rootCanvas = rootCanvas;
     }
 
     /**
@@ -246,7 +256,6 @@ public class Window {
     }
 
     public String getTitle() {
-
         return title;
     }
 

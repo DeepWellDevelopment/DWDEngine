@@ -59,6 +59,10 @@ public class Canvas extends GuiComponent {
         children.add(component);
     }
 
+    public void addShape(Shape shape) {
+        this.shapes.add(shape);
+    }
+
     @Override
     public void render() {
         children.forEach(c -> render());

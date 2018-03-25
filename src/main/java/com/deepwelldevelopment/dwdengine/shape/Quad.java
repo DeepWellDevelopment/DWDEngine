@@ -95,6 +95,10 @@ public class Quad extends Shape {
         this(window, x, y, z, size, size);
     }
 
+    public Quad(Window window, int x, int y, int width, int height) {
+        this(window, x, y, 0, width, height);
+    }
+
     @Override
     public void setOutlineWidth(float outlineWidth) {
         vertices.rewind();
