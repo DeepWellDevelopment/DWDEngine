@@ -123,6 +123,9 @@ public class Window {
                 glViewport(0, 0, width, height);
                 Window.this.width = width;
                 Window.this.height = height;
+                rootCanvas.setWidth(width);
+                rootCanvas.setHeight(height);
+                rootCanvas.notifySizeChange();
             }
         });
 

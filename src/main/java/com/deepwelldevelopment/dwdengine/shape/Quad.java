@@ -223,4 +223,32 @@ public class Quad extends Shape {
             glDisableVertexAttribArray(1);
         }
     }
+
+    public void setWidth(float width) {
+        this.width = width;
+        vertices.rewind();
+        vertices.put(x).put(y).put(z);
+        vertices.put(x).put(y + height).put(z);
+        vertices.put(x + width).put(y + height).put(z);
+        vertices.put(x + width).put(y + height).put(z);
+        vertices.put(x + width).put(y).put(z);
+        vertices.put(x).put(y).put(z);
+        vertices.flip();
+        glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
+        glBufferData(GL_ARRAY_BUFFER, vertices, GL_STATIC_DRAW);
+    }
+
+    public void setHeight(float height) {
+        this.height = height;
+        vertices.rewind();
+        vertices.put(x).put(y).put(z);
+        vertices.put(x).put(y + height).put(z);
+        vertices.put(x + width).put(y + height).put(z);
+        vertices.put(x + width).put(y + height).put(z);
+        vertices.put(x + width).put(y).put(z);
+        vertices.put(x).put(y).put(z);
+        vertices.flip();
+        glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
+        glBufferData(GL_ARRAY_BUFFER, vertices, GL_STATIC_DRAW);
+    }
 }

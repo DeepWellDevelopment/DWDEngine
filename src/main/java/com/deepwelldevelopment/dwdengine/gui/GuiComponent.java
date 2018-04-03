@@ -98,6 +98,8 @@ public abstract class GuiComponent {
 
     public abstract void render();
 
+    public abstract void notifySizeChange();
+
     public boolean isPointInComponent(int x, int y) {
         return x > this.x && x < this.x + width && y > this.y && y < this.y + height;
     }

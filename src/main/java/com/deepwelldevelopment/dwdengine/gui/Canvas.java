@@ -73,6 +73,12 @@ public class Canvas extends GuiComponent {
         quad.render();
     }
 
+    @Override
+    public void notifySizeChange() {
+        quad.setWidth(getWidth());
+        quad.setHeight(getHeight());
+    }
+
     public void addComponent(GuiComponent component) {
         children.add(component);
     }
