@@ -1,6 +1,10 @@
-package com.deepwelldevelopment.dwdengine.gui;
+package com.deepwelldevelopment.dwdengine.gui.component;
 
 import com.deepwelldevelopment.dwdengine.Window;
+import com.deepwelldevelopment.dwdengine.gui.event.InputEvent;
+import com.deepwelldevelopment.dwdengine.gui.listener.IKeyboardListener;
+import com.deepwelldevelopment.dwdengine.gui.listener.IMouseButtonPressListener;
+import com.deepwelldevelopment.dwdengine.gui.listener.IMouseMotionListener;
 
 import java.util.ArrayList;
 
@@ -59,7 +63,7 @@ public abstract class GuiComponent {
 
     public void setPosition(float x, float y) {
         this.x = x;
-        this.x = x;
+        this.y = y;
     }
 
     public float getX() {

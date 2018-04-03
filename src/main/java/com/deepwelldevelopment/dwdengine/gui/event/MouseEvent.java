@@ -1,4 +1,4 @@
-package com.deepwelldevelopment.dwdengine.gui;
+package com.deepwelldevelopment.dwdengine.gui.event;
 
 public class MouseEvent extends InputEvent {
 

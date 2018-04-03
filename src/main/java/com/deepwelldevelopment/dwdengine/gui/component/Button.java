@@ -1,6 +1,10 @@
-package com.deepwelldevelopment.dwdengine.gui;
+package com.deepwelldevelopment.dwdengine.gui.component;
 
 import com.deepwelldevelopment.dwdengine.Window;
+import com.deepwelldevelopment.dwdengine.gui.event.InputEvent;
+import com.deepwelldevelopment.dwdengine.gui.event.MouseEvent;
+import com.deepwelldevelopment.dwdengine.gui.listener.IMouseButtonPressListener;
+import com.deepwelldevelopment.dwdengine.gui.listener.IMouseButtonReleaseListener;
 import com.deepwelldevelopment.dwdengine.shape.Quad;
 
 public class Button extends GuiComponent {

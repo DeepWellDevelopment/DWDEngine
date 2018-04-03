@@ -1,7 +1,7 @@
 package com.deepwelldevelopment.dwdengine;
 
-import com.deepwelldevelopment.dwdengine.gui.Canvas;
-import com.deepwelldevelopment.dwdengine.gui.MouseEvent;
+import com.deepwelldevelopment.dwdengine.gui.component.Canvas;
+import com.deepwelldevelopment.dwdengine.gui.event.MouseEvent;
 import org.lwjgl.glfw.GLFWCursorPosCallback;
 import org.lwjgl.glfw.GLFWMouseButtonCallback;
 import org.lwjgl.glfw.GLFWWindowSizeCallback;

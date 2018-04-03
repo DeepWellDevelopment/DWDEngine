@@ -1,7 +1,9 @@
-package com.deepwelldevelopment.dwdengine.gui;
+package com.deepwelldevelopment.dwdengine.gui.component;
 
 
 import com.deepwelldevelopment.dwdengine.Window;
+import com.deepwelldevelopment.dwdengine.gui.event.InputEvent;
+import com.deepwelldevelopment.dwdengine.gui.event.MouseEvent;
 import com.deepwelldevelopment.dwdengine.shape.Quad;
 import com.deepwelldevelopment.dwdengine.shape.Shape;
 import org.joml.Vector3f;
