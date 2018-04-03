@@ -18,7 +18,7 @@ public abstract class GuiComponent {
     private float height;
 
     private ArrayList<IMouseMotionListener> mouseMotionListeners;
-    private ArrayList<IMouseButtonListener> mouseButtonListeners;
+    private ArrayList<IMouseButtonPressListener> mouseButtonListeners;
     private ArrayList<IKeyboardListener> keyboardListeners;
 
     public GuiComponent(Window window, float x, float y, float width, float height) {
@@ -41,11 +41,11 @@ public abstract class GuiComponent {
         mouseMotionListeners.add(listener);
     }
 
-    public ArrayList<IMouseButtonListener> getMouseButtonListeners() {
+    public ArrayList<IMouseButtonPressListener> getMouseButtonListeners() {
         return mouseButtonListeners;
     }
 
-    public void addMouseButtonListener(IMouseButtonListener listener) {
+    public void addMouseButtonListener(IMouseButtonPressListener listener) {
         mouseButtonListeners.add(listener);
     }
 

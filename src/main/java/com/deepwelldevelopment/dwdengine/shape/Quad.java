@@ -251,4 +251,49 @@ public class Quad extends Shape {
         glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
         glBufferData(GL_ARRAY_BUFFER, vertices, GL_STATIC_DRAW);
     }
+
+    @Override
+    public void setX(float x) {
+        super.setX(x);
+        vertices.rewind();
+        vertices.put(x).put(y).put(z);
+        vertices.put(x).put(y + height).put(z);
+        vertices.put(x + width).put(y + height).put(z);
+        vertices.put(x + width).put(y + height).put(z);
+        vertices.put(x + width).put(y).put(z);
+        vertices.put(x).put(y).put(z);
+        vertices.flip();
+        glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
+        glBufferData(GL_ARRAY_BUFFER, vertices, GL_STATIC_DRAW);
+    }
+
+    @Override
+    public void setY(float y) {
+        super.setY(y);
+        vertices.rewind();
+        vertices.put(x).put(y).put(z);
+        vertices.put(x).put(y + height).put(z);
+        vertices.put(x + width).put(y + height).put(z);
+        vertices.put(x + width).put(y + height).put(z);
+        vertices.put(x + width).put(y).put(z);
+        vertices.put(x).put(y).put(z);
+        vertices.flip();
+        glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
+        glBufferData(GL_ARRAY_BUFFER, vertices, GL_STATIC_DRAW);
+    }
+
+    @Override
+    public void setZ(float z) {
+        super.setZ(z);
+        vertices.rewind();
+        vertices.put(x).put(y).put(z);
+        vertices.put(x).put(y + height).put(z);
+        vertices.put(x + width).put(y + height).put(z);
+        vertices.put(x + width).put(y + height).put(z);
+        vertices.put(x + width).put(y).put(z);
+        vertices.put(x).put(y).put(z);
+        vertices.flip();
+        glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
+        glBufferData(GL_ARRAY_BUFFER, vertices, GL_STATIC_DRAW);
+    }
 }

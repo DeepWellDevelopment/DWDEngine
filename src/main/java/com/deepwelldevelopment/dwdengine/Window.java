@@ -59,6 +59,9 @@ public class Window {
      */
     private int vao;
 
+    private int mouseX;
+    private int mouseY;
+
     private GLCapabilities capabilities;
 
     private Canvas rootCanvas;
@@ -98,7 +101,8 @@ public class Window {
         id = glfwCreateWindow(width, height, title, NULL, NULL);
 
         if (id == NULL) {
-            System.err.println("Failed to open the window. Is OpenGL " + majorVersion + "." + minorVersion + " supported on your system?");
+            System.err.println("Failed to open the window. Is OpenGL " + majorVersion + "." + minorVersion +
+                    " supported on your system?");
             throw new IllegalStateException("Could not open the window");
         }
 
@@ -106,14 +110,38 @@ public class Window {
             @Override
             public void invoke(long window, int button, int action, int mods) {
                 if (action == GLFW_PRESS) {
-
+                    switch (button) {
+                        case GLFW_MOUSE_BUTTON_LEFT:
+                            rootCanvas.handleEvent(new MouseEvent(MouseEvent.BUTTON_PRESS,
+                                    MouseEvent.LEFT_MOUSE_BUTTON, mouseX, mouseY));
+                            break;
+                        case GLFW_MOUSE_BUTTON_RIGHT:
+                            rootCanvas.handleEvent(new MouseEvent(MouseEvent.BUTTON_PRESS,
+                                    MouseEvent.RIGHT_MOUSE_BUTTON, mouseX, mouseY));
+                            break;
+                    }
+                } else if (action == GLFW_RELEASE) {
+                    switch (button) {
+                        case GLFW_MOUSE_BUTTON_LEFT:
+                            rootCanvas.handleEvent(new MouseEvent(MouseEvent.BUTTON_RELEASE,
+                                    MouseEvent.LEFT_MOUSE_BUTTON, mouseX, mouseY));
+                            break;
+                        case GLFW_MOUSE_BUTTON_RIGHT:
+                            rootCanvas.handleEvent(new MouseEvent(MouseEvent.BUTTON_RELEASE,
+                                    MouseEvent.RIGHT_MOUSE_BUTTON, mouseX, mouseY));
+                            break;
+                    }
                 }
             }
         });
         glfwSetCursorPosCallback(id, new GLFWCursorPosCallback() {
             @Override
             public void invoke(long window, double x, double y) {
-                MouseEvent e = new MouseEvent(MouseEvent.MOVED, (int) x, (int) Math.abs((Window.this.height) - y));
+                int mX = (int) x;
+                int mY = (int) Math.abs((Window.this.height) - y);
+                MouseEvent e = new MouseEvent(MouseEvent.MOVED, mX, mY);
+                mouseX = mX;
+                mouseY = mY;
                 rootCanvas.handleEvent(e);
             }
         });
