@@ -103,9 +103,9 @@ public class Quad extends Shape {
     public void setOutlineWidth(float outlineWidth) {
         vertices.rewind();
         vertices.put(x + outlineWidth).put(y + outlineWidth).put(z);
-        vertices.put(x + outlineWidth).put(y + outlineWidth + (width - outlineWidth)).put(z);
-        vertices.put(x + outlineWidth + (width - outlineWidth)).put(y + outlineWidth + (width - outlineWidth)).put(z);
-        vertices.put(x + outlineWidth + (width - outlineWidth)).put(y + outlineWidth + (width - outlineWidth)).put(z);
+        vertices.put(x + outlineWidth).put(y + outlineWidth + (height - outlineWidth)).put(z);
+        vertices.put(x + outlineWidth + (width - outlineWidth)).put(y + outlineWidth + (height - outlineWidth)).put(z);
+        vertices.put(x + outlineWidth + (width - outlineWidth)).put(y + outlineWidth + (height - outlineWidth)).put(z);
         vertices.put(x + outlineWidth + (width - outlineWidth)).put(y + outlineWidth).put(z);
         vertices.put(x + outlineWidth).put(y + outlineWidth).put(z);
         vertices.flip();
@@ -169,6 +169,26 @@ public class Quad extends Shape {
     @Override
     public void setOutlineColor(float r, float g, float b) {
         outlineColor.rewind();
+        outlineColor.put(r).put(g).put(b);
+        outlineColor.put(r).put(g).put(b);
+        outlineColor.put(r).put(g).put(b);
+        outlineColor.put(r).put(g).put(b);
+        outlineColor.put(r).put(g).put(b);
+        outlineColor.put(r).put(g).put(b);
+        outlineColor.put(r).put(g).put(b);
+        outlineColor.put(r).put(g).put(b);
+        outlineColor.put(r).put(g).put(b);
+        outlineColor.put(r).put(g).put(b);
+        outlineColor.put(r).put(g).put(b);
+        outlineColor.put(r).put(g).put(b);
+        outlineColor.put(r).put(g).put(b);
+        outlineColor.put(r).put(g).put(b);
+        outlineColor.put(r).put(g).put(b);
+        outlineColor.put(r).put(g).put(b);
+        outlineColor.put(r).put(g).put(b);
+        outlineColor.put(r).put(g).put(b);
+        outlineColor.put(r).put(g).put(b);
+        outlineColor.put(r).put(g).put(b);
         outlineColor.put(r).put(g).put(b);
         outlineColor.put(r).put(g).put(b);
         outlineColor.put(r).put(g).put(b);

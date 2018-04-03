@@ -113,7 +113,7 @@ public class Window {
         glfwSetCursorPosCallback(id, new GLFWCursorPosCallback() {
             @Override
             public void invoke(long window, double x, double y) {
-                MouseEvent e = new MouseEvent(MouseEvent.MOVED, (int) x, (int) y - Window.this.getHeight());
+                MouseEvent e = new MouseEvent(MouseEvent.MOVED, (int) x, (int) Math.abs((Window.this.height) - y));
                 rootCanvas.handleEvent(e);
             }
         });
@@ -147,7 +147,6 @@ public class Window {
     }
 
     public Canvas getRootCanvas() {
-
         return rootCanvas;
     }
 

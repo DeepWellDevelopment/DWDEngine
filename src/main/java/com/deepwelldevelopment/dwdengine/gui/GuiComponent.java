@@ -2,6 +2,8 @@ package com.deepwelldevelopment.dwdengine.gui;
 
 import com.deepwelldevelopment.dwdengine.Window;
 
+import java.util.ArrayList;
+
 /**
  * The base GUI Component.
  */
@@ -15,12 +17,44 @@ public abstract class GuiComponent {
     private float width;
     private float height;
 
+    private ArrayList<IMouseMotionListener> mouseMotionListeners;
+    private ArrayList<IMouseButtonListener> mouseButtonListeners;
+    private ArrayList<IKeyboardListener> keyboardListeners;
+
     public GuiComponent(Window window, float x, float y, float width, float height) {
         this.window = window;
+
         this.x = x;
         this.y = y;
         this.width = width;
         this.height = height;
+        mouseMotionListeners = new ArrayList<>();
+        mouseButtonListeners = new ArrayList<>();
+        keyboardListeners = new ArrayList<>();
+    }
+
+    public ArrayList<IMouseMotionListener> getMouseMotionListeners() {
+        return mouseMotionListeners;
+    }
+
+    public void addMouseMotionListener(IMouseMotionListener listener) {
+        mouseMotionListeners.add(listener);
+    }
+
+    public ArrayList<IMouseButtonListener> getMouseButtonListeners() {
+        return mouseButtonListeners;
+    }
+
+    public void addMouseButtonListener(IMouseButtonListener listener) {
+        mouseButtonListeners.add(listener);
+    }
+
+    public ArrayList<IKeyboardListener> getKeyboardListeners() {
+        return keyboardListeners;
+    }
+
+    public void addKeyboardListener(IKeyboardListener listener) {
+        keyboardListeners.add(listener);
     }
 
     public void setPosition(float x, float y) {

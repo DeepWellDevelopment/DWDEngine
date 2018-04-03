@@ -43,16 +43,34 @@ public class Canvas extends GuiComponent {
     public void handleEvent(InputEvent e) {
         //handle the event here
         if (e instanceof MouseEvent) {
+            MouseEvent me = (MouseEvent) e;
+            if (me.getEventCode() == MouseEvent.MOVED) {
+                getMouseMotionListeners().forEach((listener) -> listener.mouseMoved(me));
+            }
         }
-
         //delegate to children to handle the event
-        children.forEach(c -> handleEvent(e));
+        for (GuiComponent c : children) {
+            c.handleEvent(e);
+        }
     }
 
     public void setColor(float r, float g, float b) {
         color.set(r, g, b);
         quad.setColor(r, g, b);
         quad.setOutlineColor(0, 0, 0);
+    }
+
+    @Override
+    public void render() {
+        for (GuiComponent c : children) {
+            c.render();
+        }
+        for (Shape s : shapes) {
+            s.render();
+        }
+
+        //self rendering
+        quad.render();
     }
 
     public void addComponent(GuiComponent component) {
@@ -63,14 +81,7 @@ public class Canvas extends GuiComponent {
         this.shapes.add(shape);
     }
 
-    @Override
-    public void render() {
-        children.forEach(c -> render());
-        for (Shape s : shapes) {
-            s.render();
-        }
-
-        //self rendering
-        quad.render();
+    public void setOutlineColor(float r, float g, float b) {
+        quad.setColor(r, g, b);
     }
 }
