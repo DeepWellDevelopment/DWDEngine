@@ -82,6 +82,6 @@ public class Canvas extends GuiComponent {
     }
 
     public void setOutlineColor(float r, float g, float b) {
-        quad.setColor(r, g, b);
+        quad.setOutlineColor(r, g, b);
     }
 }
