@@ -3,7 +3,6 @@ package com.deepwelldevelopment.dwdengine.gui.component;
 
 import com.deepwelldevelopment.dwdengine.Window;
 import com.deepwelldevelopment.dwdengine.gui.event.InputEvent;
-import com.deepwelldevelopment.dwdengine.gui.event.MouseEvent;
 import com.deepwelldevelopment.dwdengine.shape.Quad;
 import com.deepwelldevelopment.dwdengine.shape.Shape;
 import org.joml.Vector3f;
@@ -43,13 +42,9 @@ public class Canvas extends GuiComponent {
 
     @Override
     public void handleEvent(InputEvent e) {
+        super.handleEvent(e);
         //handle the event here
-        if (e instanceof MouseEvent) {
-            MouseEvent me = (MouseEvent) e;
-            if (me.getEventCode() == MouseEvent.MOVED) {
-                getMouseMotionListeners().forEach((listener) -> listener.mouseMoved(me));
-            }
-        }
+
         //delegate to children to handle the event
         for (GuiComponent c : children) {
             c.handleEvent(e);

@@ -2,8 +2,10 @@ package com.deepwelldevelopment.dwdengine.gui.component;
 
 import com.deepwelldevelopment.dwdengine.Window;
 import com.deepwelldevelopment.dwdengine.gui.event.InputEvent;
+import com.deepwelldevelopment.dwdengine.gui.event.MouseEvent;
 import com.deepwelldevelopment.dwdengine.gui.listener.IKeyboardListener;
 import com.deepwelldevelopment.dwdengine.gui.listener.IMouseButtonPressListener;
+import com.deepwelldevelopment.dwdengine.gui.listener.IMouseButtonReleaseListener;
 import com.deepwelldevelopment.dwdengine.gui.listener.IMouseMotionListener;
 
 import java.util.ArrayList;
@@ -22,7 +24,8 @@ public abstract class GuiComponent {
     private float height;
 
     private ArrayList<IMouseMotionListener> mouseMotionListeners;
-    private ArrayList<IMouseButtonPressListener> mouseButtonListeners;
+    private ArrayList<IMouseButtonPressListener> mouseButtonPressListeners;
+    private ArrayList<IMouseButtonReleaseListener> mouseButtonReleaseListeners;
     private ArrayList<IKeyboardListener> keyboardListeners;
 
     public GuiComponent(Window window, float x, float y, float width, float height) {
@@ -33,7 +36,8 @@ public abstract class GuiComponent {
         this.width = width;
         this.height = height;
         mouseMotionListeners = new ArrayList<>();
-        mouseButtonListeners = new ArrayList<>();
+        mouseButtonPressListeners = new ArrayList<>();
+        mouseButtonReleaseListeners = new ArrayList<>();
         keyboardListeners = new ArrayList<>();
     }
 
@@ -45,20 +49,28 @@ public abstract class GuiComponent {
         mouseMotionListeners.add(listener);
     }
 
-    public ArrayList<IMouseButtonPressListener> getMouseButtonListeners() {
-        return mouseButtonListeners;
+    public ArrayList<IMouseButtonPressListener> getMouseButtonPressListeners() {
+        return mouseButtonPressListeners;
+    }
+
+    public void addMouseButtonReleaseListener(IMouseButtonReleaseListener listener) {
+        mouseButtonReleaseListeners.add(listener);
+    }
+
+    public ArrayList<IMouseButtonReleaseListener> getMouseButtonReleaseListeners() {
+        return mouseButtonReleaseListeners;
     }
 
     public void addMouseButtonListener(IMouseButtonPressListener listener) {
-        mouseButtonListeners.add(listener);
-    }
-
-    public ArrayList<IKeyboardListener> getKeyboardListeners() {
-        return keyboardListeners;
+        mouseButtonPressListeners.add(listener);
     }
 
     public void addKeyboardListener(IKeyboardListener listener) {
         keyboardListeners.add(listener);
+    }
+
+    public ArrayList<IKeyboardListener> getKeyboardListeners() {
+        return keyboardListeners;
     }
 
     public void setPosition(float x, float y) {
@@ -98,7 +110,30 @@ public abstract class GuiComponent {
         this.height = height;
     }
 
-    public abstract void handleEvent(InputEvent e);
+    public void handleEvent(InputEvent e) {
+        if (e instanceof MouseEvent) {
+            MouseEvent me = (MouseEvent) e;
+            if (me.getEventCode() == MouseEvent.MOVED) {
+                getMouseMotionListeners().forEach((listener) -> {
+                    if (!me.isConsumed()) {
+                        listener.mouseMoved(me);
+                    }
+                });
+            } else if (me.getEventCode() == MouseEvent.BUTTON_PRESS) {
+                mouseButtonPressListeners.forEach((listener) -> {
+                    if (!me.isConsumed()) {
+                        listener.mouseDown(me);
+                    }
+                });
+            } else if (me.getEventCode() == MouseEvent.BUTTON_RELEASE) {
+                mouseButtonReleaseListeners.forEach((listener) -> {
+                    if (!me.isConsumed()) {
+                        listener.mouseUp(me);
+                    }
+                });
+            }
+        }
+    }
 
     public abstract void render();
 
