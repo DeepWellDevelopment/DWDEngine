@@ -166,6 +166,11 @@ public class Window {
                 rootCanvas.notifySizeChange();
             }
         });
+        glfwSetKeyCallback(id, (long window, int key, int scancode, int action, int mods) -> {
+            if (key == GLFW_KEY_ESCAPE && action == GLFW_RELEASE) {
+                glfwSetWindowShouldClose(window, true);
+            }
+        });
 
         // Center the window
         glfwSetWindowPos(id, 0, 0);
