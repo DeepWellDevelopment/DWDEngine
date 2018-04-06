@@ -5,6 +5,7 @@ import com.deepwelldevelopment.dwdengine.gui.event.MouseEvent;
 import com.deepwelldevelopment.dwdengine.shape.TexturedQuad;
 import org.lwjgl.glfw.GLFWCursorPosCallback;
 import org.lwjgl.glfw.GLFWMouseButtonCallback;
+import org.lwjgl.glfw.GLFWVidMode;
 import org.lwjgl.glfw.GLFWWindowSizeCallback;
 import org.lwjgl.opengl.GLCapabilities;
 
@@ -60,11 +61,12 @@ public class Window {
      */
     private int vao;
 
+    private int screenWidth;
+    private int screenHeight;
+    private boolean fullscreen;
     private int mouseX;
     private int mouseY;
-
     private GLCapabilities capabilities;
-
     private Canvas rootCanvas;
 
     public Window(String title, int width, int height) {
@@ -99,7 +101,15 @@ public class Window {
         else
             glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GLFW_FALSE);
         glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-        id = glfwCreateWindow(width, height, title, NULL, NULL);
+
+        GLFWVidMode vidmode = glfwGetVideoMode(glfwGetPrimaryMonitor());
+        screenWidth = vidmode.width();
+        screenHeight = vidmode.height();
+
+        this.width = screenWidth;
+        this.height = screenHeight;
+
+        id = glfwCreateWindow(screenWidth, screenHeight, title, glfwGetPrimaryMonitor(), NULL);
 
         if (id == NULL) {
             System.err.println("Failed to open the window. Is OpenGL " + majorVersion + "." + minorVersion +
@@ -158,7 +168,8 @@ public class Window {
             }
         });
 
-
+        // Center the window
+        glfwSetWindowPos(id, 0, 0);
         glfwMakeContextCurrent(id);
         glfwShowWindow(id);
 
@@ -167,7 +178,7 @@ public class Window {
         glEnable(GL_DEPTH_TEST);
         glDepthFunc(GL_LESS);
 
-        glViewport(0, 0, width, height);
+        glViewport(0, 0, this.width, this.height);
         glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
         glLineWidth(100);
 
@@ -178,10 +189,30 @@ public class Window {
         vao = glGenVertexArrays();
         glBindVertexArray(vao);
 
-        rootCanvas = new Canvas(this, 0, 0, width, height);
+        rootCanvas = new Canvas(this, 0, 0, this.width, this.height);
         rootCanvas.setColor(0.0F, 0.0F, 0.0f);
         TexturedQuad quad = new TexturedQuad(this, 100, 100, 100, 100, "test.png");
         rootCanvas.addShape(quad);
+    }
+
+    public static void main(String[] args) {
+        Window window = new Window("Test", 1024, 768);
+        while (!glfwWindowShouldClose(window.id)) {
+            window.render();
+            glfwSwapBuffers(window.id);
+            glfwPollEvents();
+        }
+        glfwDestroyWindow(window.id);
+        glfwTerminate();
+        glDeleteVertexArrays(window.vao);
+    }
+
+    public int getScreenWidth() {
+        return screenWidth;
+    }
+
+    public int getScreenHeight() {
+        return screenHeight;
     }
 
     public Canvas getRootCanvas() {
@@ -255,19 +286,6 @@ public class Window {
         glfwSwapBuffers(id);
     }
 
-    public static void main(String[] args) {
-        Window window = new Window("Test", 1024, 768);
-        while (!glfwWindowShouldClose(window.id)) {
-            window.render();
-            System.out.print(window.width + ", " + window.height + "\r");
-            glfwSwapBuffers(window.id);
-            glfwPollEvents();
-        }
-        glfwDestroyWindow(window.id);
-        glfwTerminate();
-        glDeleteVertexArrays(window.vao);
-    }
-
     public long getId() {
         return id;
     }
@@ -314,5 +332,17 @@ public class Window {
 
     public void setHeight(int height) {
         this.height = height;
+    }
+
+    public void setFullscreen(boolean full) {
+//        if (full) {
+//            long id = glfwCreateWindow(screenWidth, screenHeight, title, glfwGetPrimaryMonitor(), this.id);
+//            glfwDestroyWindow(id);
+//            this.id = id;
+//        } else {
+//            long id = glfwCreateWindow(screenWidth, screenHeight, title, glfwGetPrimaryMonitor(), this.id);
+//            glfwDestroyWindow(id);
+//            this.id = id;
+//        }
     }
 }
