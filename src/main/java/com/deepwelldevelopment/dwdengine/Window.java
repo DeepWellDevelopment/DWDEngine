@@ -2,7 +2,6 @@ package com.deepwelldevelopment.dwdengine;
 
 import com.deepwelldevelopment.dwdengine.gui.component.Canvas;
 import com.deepwelldevelopment.dwdengine.gui.event.MouseEvent;
-import com.deepwelldevelopment.dwdengine.shape.TexturedQuad;
 import org.lwjgl.glfw.GLFWCursorPosCallback;
 import org.lwjgl.glfw.GLFWMouseButtonCallback;
 import org.lwjgl.glfw.GLFWVidMode;
@@ -191,8 +190,6 @@ public class Window {
 
         rootCanvas = new Canvas(this, 0, 0, this.width, this.height);
         rootCanvas.setColor(0.0F, 0.0F, 0.0f);
-        TexturedQuad quad = new TexturedQuad(this, 100, 100, 100, 100, "test.png");
-        rootCanvas.addShape(quad);
     }
 
     public static void main(String[] args) {
