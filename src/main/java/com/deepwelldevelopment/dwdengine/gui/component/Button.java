@@ -15,7 +15,7 @@ public class Button extends GuiComponent {
 
     public Button(Window window, float x, float y, float width, float height) {
         super(window, x, y, width, height);
-        quad = new Quad(window, x, y, width, height);
+        quad = new Quad(window, x, y, 0, width, height);
         quad.setOutlineColor(0.95f, 0.0f, 0.95f);
         consume = true;
     }
