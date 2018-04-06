@@ -18,6 +18,15 @@ public class Triangle extends Shape {
         vertices.put(x3).put(y3).put(z3);
         vertices.flip();
 
+        color = BufferUtils.createFloatBuffer(2 * 3 * 3);
+        color.put(1).put(1).put(1);
+        color.put(1).put(1).put(1);
+        color.put(1).put(1).put(1);
+        color.put(1).put(1).put(1);
+        color.put(1).put(1).put(1);
+        color.put(1).put(1).put(1);
+        color.flip();
+
         shader = new BasicShader();
         shader.useProgram();
 
