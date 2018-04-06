@@ -2,6 +2,7 @@ package com.deepwelldevelopment.dwdengine.shape;
 
 import com.deepwelldevelopment.dwdengine.Window;
 import com.deepwelldevelopment.dwdengine.shader.BasicShader;
+import org.joml.Vector2f;
 import org.lwjgl.BufferUtils;
 
 import static org.lwjgl.opengl.GL11.*;
@@ -18,10 +19,7 @@ public class Triangle extends Shape {
         vertices.put(x3).put(y3).put(z3);
         vertices.flip();
 
-        color = BufferUtils.createFloatBuffer(2 * 3 * 3);
-        color.put(1).put(1).put(1);
-        color.put(1).put(1).put(1);
-        color.put(1).put(1).put(1);
+        color = BufferUtils.createFloatBuffer(3 * 3);
         color.put(1).put(1).put(1);
         color.put(1).put(1).put(1);
         color.put(1).put(1).put(1);
@@ -50,6 +48,7 @@ public class Triangle extends Shape {
         color.put(r).put(g).put(b);
         color.put(r).put(g).put(b);
         color.put(r).put(g).put(b);
+        color.flip();
         glBindBuffer(GL_ARRAY_BUFFER, colorBuffer);
         glBufferData(GL_ARRAY_BUFFER, color, GL_STATIC_DRAW);
     }
@@ -62,6 +61,7 @@ public class Triangle extends Shape {
     @Override
     public void render() {
         shader.useProgram();
+        shader.loadVector2(screenLocation, new Vector2f(window.getWidth(), window.getHeight()));
         glEnableVertexAttribArray(0);
         glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
         glVertexAttribPointer(0, 3, GL_FLOAT, false, 0, 0);
