@@ -8,6 +8,7 @@ import org.joml.Vector2f;
 import java.nio.FloatBuffer;
 
 import static org.lwjgl.opengl.GL11.*;
+import static org.lwjgl.opengl.GL13.glActiveTexture;
 import static org.lwjgl.opengl.GL15.*;
 import static org.lwjgl.opengl.GL20.*;
 
@@ -62,5 +63,6 @@ public class TexturedQuad extends Quad {
         glDrawArrays(GL_TRIANGLES, 0, vertices.capacity());
         glDisableVertexAttribArray(0);
         glDisableVertexAttribArray(1);
+        glActiveTexture(0);
     }
 }

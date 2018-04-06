@@ -60,7 +60,7 @@ public class Texture {
             if (image == null) {
                 throw new IOException("Failed to read image" + stbi_failure_reason());
             }
-            glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB8, w.get(0), h.get(0), 0, GL_RGB, GL_UNSIGNED_BYTE, image);
+            glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, w.get(0), h.get(0), 0, GL_RGBA, GL_UNSIGNED_BYTE, image);
             stbi_image_free(image);
         } catch (IOException e) {
             e.printStackTrace();
