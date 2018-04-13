@@ -56,6 +56,10 @@ public abstract class Shape {
 
     public abstract void setOutlineColor(float r, float g, float b);
 
+    public abstract void notifySizeChange();
+
+    public abstract boolean isPointInShape(float x, float y);
+
     /**
      * Draws the shape using the active OpenGL context
      */

@@ -199,6 +199,16 @@ public class Quad extends Shape {
     }
 
     @Override
+    public void notifySizeChange() {
+
+    }
+
+    @Override
+    public boolean isPointInShape(float x, float y) {
+        return false;
+    }
+
+    @Override
     public void render() {
         shader.useProgram();
         shader.loadVector2(screenLocation, new Vector2f(window.getWidth(), window.getHeight()));
