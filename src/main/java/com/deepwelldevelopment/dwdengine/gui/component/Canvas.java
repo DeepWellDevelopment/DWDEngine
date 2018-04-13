@@ -78,6 +78,11 @@ public class Canvas extends GuiComponent {
         quad.setY(getY());
     }
 
+    @Override
+    public boolean isPointInComponent(int x, int y) {
+        return true;
+    }
+
     public void addComponent(GuiComponent component) {
         children.add(component);
     }

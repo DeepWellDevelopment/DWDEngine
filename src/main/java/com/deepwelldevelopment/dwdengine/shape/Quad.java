@@ -205,7 +205,7 @@ public class Quad extends Shape {
 
     @Override
     public boolean isPointInShape(float x, float y) {
-        return false;
+        return x > this.x && x < this.x + width && y > this.y && y < this.y + height;
     }
 
     @Override
@@ -221,6 +221,7 @@ public class Quad extends Shape {
         glDrawArrays(GL_TRIANGLES, 0, outlineVertices.capacity());
         glDisableVertexAttribArray(0);
         glDisableVertexAttribArray(1);
+        glDisableVertexAttribArray(2);
         if (fill) {
             glEnableVertexAttribArray(0);
             glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
@@ -305,5 +306,15 @@ public class Quad extends Shape {
         vertices.flip();
         glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
         glBufferData(GL_ARRAY_BUFFER, vertices, GL_STATIC_DRAW);
+    }
+
+    @Override
+    public float getWidth() {
+        return width;
+    }
+
+    @Override
+    public float getHeight() {
+        return height;
     }
 }

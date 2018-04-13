@@ -58,6 +58,18 @@ public abstract class Shape {
 
     public abstract void notifySizeChange();
 
+    public float getX() {
+        return x;
+    }
+
+    public float getY() {
+        return y;
+    }
+
+    public float getZ() {
+        return z;
+    }
+
     public abstract boolean isPointInShape(float x, float y);
 
     /**
@@ -84,4 +96,8 @@ public abstract class Shape {
     public void setZ(float z) {
         this.z = z;
     }
+
+    public abstract float getWidth();
+
+    public abstract float getHeight();
 }

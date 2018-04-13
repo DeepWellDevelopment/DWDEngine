@@ -4,20 +4,26 @@ import com.deepwelldevelopment.dwdengine.Window;
 import com.deepwelldevelopment.dwdengine.gui.event.InputEvent;
 import com.deepwelldevelopment.dwdengine.gui.event.MouseEvent;
 import com.deepwelldevelopment.dwdengine.shape.Quad;
+import com.deepwelldevelopment.dwdengine.shape.Shape;
 
 public class Button extends GuiComponent {
 
     private IButtonListener onPress = () -> {
     };
-    private Quad quad;
+    private Shape shape;
 
     private boolean consume;
 
     public Button(Window window, float x, float y, float width, float height) {
         super(window, x, y, width, height);
-        quad = new Quad(window, x, y, 0, width, height);
-        quad.setOutlineColor(0.95f, 0.0f, 0.95f);
+        shape = new Quad(window, x, y, 0, width, height);
+        shape.setOutlineColor(0.95f, 0.0f, 0.95f);
         consume = true;
+    }
+
+    public Button(Window window, Shape shape) {
+        super(window, shape.getX(), shape.getY(), shape.getWidth(), shape.getHeight());
+        this.shape = shape;
     }
 
     @Override
@@ -27,7 +33,7 @@ public class Button extends GuiComponent {
             MouseEvent me = ((MouseEvent) e);
 
             if (!isPointInComponent(me.getX(), me.getY())) {
-                quad.setOutlineWidth(0);
+                shape.setOutlineWidth(0);
                 return;
             }
 
@@ -37,22 +43,26 @@ public class Button extends GuiComponent {
                 onPress.onPress();
                 if (consume) me.consume();
             } else if (me.getEventCode() == MouseEvent.MOVED) {
-                quad.setOutlineWidth(5);
+                shape.setOutlineWidth(5);
             }
         }
     }
 
     @Override
     public void render() {
-        quad.render();
+        shape.render();
     }
 
     @Override
     public void notifySizeChange() {
-        quad.setWidth(getWidth());
-        quad.setHeight(getHeight());
-        quad.setX(getX());
-        quad.setY(getY());
+        shape.setX(getX());
+        shape.setY(getY());
+        shape.notifySizeChange();
+    }
+
+    @Override
+    public boolean isPointInComponent(int x, int y) {
+        return shape.isPointInShape(x, y);
     }
 
     public void setOnPress(IButtonListener onPress) {

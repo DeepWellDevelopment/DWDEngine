@@ -31,12 +31,12 @@ public class Texture {
         this.endV = endV;
 
         uvCoordinates = BufferUtils.createFloatBuffer(2 * 3 * 2);
-        uvCoordinates.put(startU).put(startV);
         uvCoordinates.put(startU).put(endV);
-        uvCoordinates.put(endU).put(endV);
-        uvCoordinates.put(endU).put(endV);
-        uvCoordinates.put(endU).put(startV);
         uvCoordinates.put(startU).put(startV);
+        uvCoordinates.put(endU).put(startV);
+        uvCoordinates.put(endU).put(startV);
+        uvCoordinates.put(endU).put(endV);
+        uvCoordinates.put(startU).put(endV);
         uvCoordinates.flip();
         textureBuffer = loadTexture(name);
     }

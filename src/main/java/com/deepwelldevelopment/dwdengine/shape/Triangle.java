@@ -126,4 +126,14 @@ public class Triangle extends Shape {
         glDisableVertexAttribArray(0);
         glDisableVertexAttribArray(1);
     }
+
+    @Override
+    public float getWidth() {
+        return 0;
+    }
+
+    @Override
+    public float getHeight() {
+        return 0;
+    }
 }

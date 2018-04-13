@@ -1,7 +1,10 @@
 package com.deepwelldevelopment.dwdengine;
 
+import com.deepwelldevelopment.dwdengine.gui.component.Button;
 import com.deepwelldevelopment.dwdengine.gui.component.Canvas;
 import com.deepwelldevelopment.dwdengine.gui.event.MouseEvent;
+import com.deepwelldevelopment.dwdengine.shape.Quad;
+import com.deepwelldevelopment.dwdengine.shape.TexturedQuad;
 import org.lwjgl.glfw.GLFWCursorPosCallback;
 import org.lwjgl.glfw.GLFWMouseButtonCallback;
 import org.lwjgl.glfw.GLFWVidMode;
@@ -187,14 +190,21 @@ public class Window {
         glLineWidth(100);
 
         glDisable(GL_CULL_FACE);
-        glEnable(GL_BLEND);
-        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
         vao = glGenVertexArrays();
         glBindVertexArray(vao);
 
         rootCanvas = new Canvas(this, 0, 0, this.width, this.height);
-        rootCanvas.setColor(0.0F, 0.0F, 0.0f);
+        rootCanvas.setColor(025f, 0.63F, 0.42f);
+        Quad quad = new TexturedQuad(this, 0, 0, -1, 650, 650, "test" +
+                ".png");
+        Button button = new Button(this, quad);
+        button.setOnPress(() -> {
+            System.out.println("hello");
+        });
+        Button b = new Button(this, 500, 700, 150, 50);
+        rootCanvas.addComponent(button);
+        rootCanvas.addComponent(b);
     }
 
     public static void main(String[] args) {
