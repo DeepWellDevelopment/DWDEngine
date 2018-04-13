@@ -50,6 +50,16 @@ public class Line extends Shape {
     }
 
     @Override
+    public void notifySizeChange() {
+
+    }
+
+    @Override
+    public boolean isPointInShape(float x, float y) {
+        return false;
+    }
+
+    @Override
     public void render() {
         shader.useProgram();
         glEnableVertexAttribArray(0);
